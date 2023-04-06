@@ -2,6 +2,7 @@ package br.upe.sisepei.sisepei.core.usuario.modelo;
 
 import java.util.List;
 
+import br.upe.sisepei.sisepei.core.edital.modelo.Edital;
 import br.upe.sisepei.sisepei.core.usuarioPerfil.modelo.UsuarioPerfil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,7 +31,7 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
 	private List<UsuarioPerfil> perfis;
 	
-//	@OneToMany(mappedBy = "Edital")
-//	private List<Edital> editais;
+	@OneToMany(mappedBy = "coordenador")
+	private List<Edital> editais;
 	
 }

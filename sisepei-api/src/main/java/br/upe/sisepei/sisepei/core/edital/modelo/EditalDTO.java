@@ -3,9 +3,8 @@ package br.upe.sisepei.sisepei.core.edital.modelo;
 import java.io.File;
 import java.util.Date;
 
-//import br.upe.sisepei.sisepei.core.edital.modelo.TipoEnum;
-import br.upe.sisepei.sisepei.core.usuario.modelo.Usuario;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -20,16 +19,14 @@ public class EditalDTO {
 	@NotBlank
 	private String requisitos;
 	
-	@NotBlank
 	private File edital;
 	
-	@NotBlank
+	@NotNull
 	private Date prazo;
 	
-	@NotBlank
+	@NotNull
 	private TipoEnum tipo;
 	
-	@NotBlank
-	private Usuario coordenador;
+	private Long coordenador;
 
 }

@@ -10,12 +10,17 @@ import br.upe.sisepei.sisepei.base.exception.NaoEncontradoException;
 import br.upe.sisepei.sisepei.base.exception.ValidacaoException;
 import br.upe.sisepei.sisepei.core.edital.modelo.Edital;
 import br.upe.sisepei.sisepei.core.edital.modelo.EditalDTO;
+import br.upe.sisepei.sisepei.core.usuario.UsuarioRepositorio;
+import br.upe.sisepei.sisepei.core.usuario.modelo.Usuario;
 
 @Service
 public class EditalServico {
 
 	@Autowired
 	private EditalRepository repositorio;
+	
+	@Autowired
+	private UsuarioRepositorio usuarioRepositorio;
 	
 	public List<Edital> listarEditais(){
 		return repositorio.findAll();
@@ -34,6 +39,8 @@ public class EditalServico {
 		if(repositorio.existsByTitulo(edital.getTitulo())){
 			throw new ValidacaoException("Título já existente");
 		}
+		
+		Optional<Usuario> coordenador = usuarioRepositorio.findById(edital.getCoordenador());
 	
 		
 		Edital editalSalvar = new Edital();
@@ -42,7 +49,7 @@ public class EditalServico {
 		editalSalvar.setEdital(edital.getEdital());
 		editalSalvar.setRequisitos(edital.getRequisitos());
 		editalSalvar.setTipo(edital.getTipo());
-		editalSalvar.setCoordenador(edital.getCoordenador());
+		editalSalvar.setCoordenador(coordenador.get());
 		editalSalvar.setPrazo(edital.getPrazo());
 		
 		return repositorio.save(editalSalvar);

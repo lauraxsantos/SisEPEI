@@ -64,7 +64,7 @@ public class UsuarioServico {
 //		usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
 		
 		usuario.setPerfis(usuarioExistente.get().getPerfis());
-//		usuario.setEditais(usuarioExistente.get().getEditais());
+		usuario.setEditais(usuarioExistente.get().getEditais());
 		
 		return usuarioRepositorio.save(usuario);
 	}

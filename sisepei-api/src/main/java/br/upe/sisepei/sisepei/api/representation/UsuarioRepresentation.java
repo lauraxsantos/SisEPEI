@@ -18,8 +18,7 @@ public class UsuarioRepresentation implements Serializable {
 	
 	private List<UsuarioPerfilRepresentation> perfis;
 	
-//	@JsonIgnore
-//	private List<EditalRepresentation> editais;
+	private List<EditalRepresentation> editais;
 	
 }
 
