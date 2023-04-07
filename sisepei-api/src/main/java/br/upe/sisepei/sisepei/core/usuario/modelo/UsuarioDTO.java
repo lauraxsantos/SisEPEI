@@ -1,5 +1,6 @@
 package br.upe.sisepei.sisepei.core.usuario.modelo;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -10,7 +11,7 @@ public class UsuarioDTO {
 	@NotBlank
 	private String nome;
 
-	@NotBlank
+	@Email
 	private String email;
 	
 	@NotBlank

@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.upe.sisepei.sisepei.base.exception.NaoEncontradoException;
@@ -20,7 +20,7 @@ public class UsuarioServico {
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
 	
-//	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	public List<Usuario> listarUsuarios() {
 		return usuarioRepositorio.findAll();
@@ -41,7 +41,7 @@ public class UsuarioServico {
 		}
 		
 		Usuario usuario = converterDTO(usuarioDTO);
-//		usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
+		usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
 		
 		
 		return usuarioRepositorio.save(usuario);
@@ -61,7 +61,7 @@ public class UsuarioServico {
 		
 		Usuario usuario = converterDTO(usuarioDTO);
 		usuario.setId(id);
-//		usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
+		usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
 		
 		usuario.setPerfis(usuarioExistente.get().getPerfis());
 		usuario.setEditais(usuarioExistente.get().getEditais());

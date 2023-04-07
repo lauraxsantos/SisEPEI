@@ -3,8 +3,6 @@ package br.upe.sisepei.sisepei.api.representation;
 import java.io.File;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.upe.sisepei.sisepei.core.edital.modelo.TipoEnum;
 import lombok.Data;
 
@@ -24,7 +22,7 @@ public class EditalRepresentation {
 	private File edital;
 	
 	private TipoEnum tipo;
-	@JsonIgnore
+	
 	private UsuarioRepresentation coordenador;
 
 }

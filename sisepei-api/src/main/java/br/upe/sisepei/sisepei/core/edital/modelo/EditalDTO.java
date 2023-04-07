@@ -19,6 +19,7 @@ public class EditalDTO {
 	@NotBlank
 	private String requisitos;
 	
+//	@NotNull
 	private File edital;
 	
 	@NotNull

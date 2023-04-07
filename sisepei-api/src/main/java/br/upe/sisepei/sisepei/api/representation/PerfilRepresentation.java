@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.upe.sisepei.sisepei.core.perfil.modelo.PerfilEnum;
 import lombok.Data;
 
 @Data
@@ -13,10 +14,10 @@ public class PerfilRepresentation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	
-	private String nome;
+	private PerfilEnum nome;
 	
 	@JsonIgnore
-	List<UsuarioPerfilRepresentation> usuarios;
+	List<UsuarioRepresentation> usuarios;
 	
 }
 
