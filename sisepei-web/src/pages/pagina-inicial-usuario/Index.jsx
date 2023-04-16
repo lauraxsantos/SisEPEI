@@ -9,6 +9,7 @@ import Filter from '../../Components/layout/Filter';
 
 export function PaginaInicial() {
   const [searchTerm, setSearchTerm] = useState('')
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [cardsData, setCardsData] = useState([{ id: 1, name: "Edital 1", type: "Tipo 1", description: "Descrição 1" },
   { id: 2, name: "Edital 2", type: "Tipo 2", description: "Lorem ipsum sit amet, consectetur adipiscing elit. Nulla facilisi. Vestibulum consectetur, sapien auctor consectetur fermentum, sem mauris bibendum mauris, id congue diam tellus ut nisl. Sed ac luctus leo. Donec euismod justo eu libero pretium ultricies. Sed aliquam, nibh vel ullamcorper feugiat, mi purus egestas nunc, vel sodales mi massa in metus. Aenean auctor, ipsum a tincidunt malesuada, felis dui convallis tortor, in fringilla elit elit nec ante. Sed tristique nibh nibh, non dapibus massa pulvinar eu. Sed efficitur metus nec odio blandit interdum. Sed blandit lacus ac elit imperdiet, non gravida metus pharetra. Sed non lacus tincidunt, bibendum metus eget, vestibulum ex. In hac habitasse platea dictumst. Maecenas rhoncus orci a libero efficitur, sit amet semper felis dignissim. Suspendisse potenti." },
   { id: 3, name: "Edital 3", type: "Tipo 1", description: "Descrição 3" },
@@ -26,8 +27,25 @@ export function PaginaInicial() {
         console.log(error);
       });
   }, []);
-  const filteredCards = cardsData.filter(card => card.name.toLowerCase().includes(searchTerm.toLowerCase())
-      || card.type.toLowerCase().includes(searchTerm.toLowerCase()))
+  const handleFilterChange = (selectedOptions) => {
+    const optionNames = selectedOptions.map(option => option.label.toLowerCase());
+    setSelectedOptions(optionNames);
+  };
+
+  const filteredCards = cardsData.filter((card) => {
+    const includesSearchTerm =
+      searchTerm.trim() === '' ||
+      card.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      card.type.toLowerCase().includes(searchTerm.toLowerCase());
+    if (selectedOptions.length === 0) {
+      return includesSearchTerm;
+    } else {
+      return selectedOptions.some((option) =>
+        card.type.toLowerCase().includes(option.toLowerCase())
+      ) && includesSearchTerm;
+    }
+  });
+
   return ( 
     <div id='page1'>
       <h1 className='welcome'>Bem vindo!</h1>
@@ -36,8 +54,8 @@ export function PaginaInicial() {
 
       <div className='button-search'>
           <div className='search-filter'>
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            <Filter/>
+            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <Filter onFilterChange={handleFilterChange}/>
           </div>
       </div>
 
