@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './EscolhaDePersonalidade.css';
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 export function EscolhaDePersonalidade(){
 
     const navigate =  useNavigate();
-
-    const cookie = Cookies.get('token');
-
     const [ce, setCe] = useState(false);
     const [ci, setCi] = useState(false);
     const [cp, setCp] = useState(false);
     const [adm, setAdm] = useState(false);
 
-    useEffect(() => {
 
-        let perfil = cookie.perfis;
+    useEffect(() => {
+        const token  = Cookies.get("token");
+        
+        let perfil = token.perfis
 
         for (let index = 0; index < perfil.length; index++) {
             if(perfil[index] === "ADMINISTRADOR"){
@@ -35,8 +33,7 @@ export function EscolhaDePersonalidade(){
         
     }, []);
 
-    
-   
+
     return(
         <>
         <fieldset id="menu intermedio">
