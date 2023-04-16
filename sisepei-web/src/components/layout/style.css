@@ -57,7 +57,7 @@
   display: flex;  
 }
 
-.filter button{
+.filter-button button {
   background-color: #D9D9D9;
   border: none;
   margin-left: 10px;
@@ -69,13 +69,38 @@
   display: flex;
   justify-content: center;
 }
-
-.filter button:hover{
+.aplicar-filtro{
+  display: flex;
+  align-items: center;
+  background-color: #7991CF;
+  width: 75%;
+  margin-left: 20px;
+  border-radius: 5px;
+  justify-content: center;
+  height: 30px;
+  color:white;
+}
+.aplicar-filtro:hover{
+  background-color: #677cb1 ;
+}
+.filter-button button:hover{
   background-color: #7991CF;
 }
 
-.filter button img{
+.filter-button button:focus{
+  background-color: #7991CF ;
+}
+
+.filter-button button:active{
+  background-color: #7991CF !important;
+}
+
+.filter-button button img{
   transform: scale(0.7);
+}
+
+.filter-items{
+  margin: 15px;
 }
 
 
