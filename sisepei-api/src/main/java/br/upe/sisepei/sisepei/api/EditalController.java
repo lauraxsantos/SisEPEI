@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-import br.upe.sisepei.sisepei.api.representation.EditalArquivoRepresentation;
 import br.upe.sisepei.sisepei.api.representation.EditalRepresentation;
 import br.upe.sisepei.sisepei.core.edital.modelo.TipoEnum;
 import org.modelmapper.ModelMapper;
@@ -22,7 +21,6 @@ import br.upe.sisepei.sisepei.core.edital.modelo.Edital;
 import br.upe.sisepei.sisepei.core.edital.modelo.EditalDTO;
 import org.springframework.web.multipart.MultipartFile;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/edital")
 public class EditalController {
@@ -37,12 +35,6 @@ public class EditalController {
 
 	}
 
-	@GetMapping("tipo/{tipo}")
-	public ResponseEntity<List<EditalRepresentation>> buscaEditaisTipo(@PathVariable TipoEnum tipo) {
-		return ResponseEntity.ok(editalServico.buscarEditaisTipo(tipo).stream()
-				.map(this::converter).collect(Collectors.toList()));
-	}
-
 	@GetMapping("/{id}")
 	public ResponseEntity<?> buscarEdital(@PathVariable Long id){
 		try {
@@ -52,16 +44,6 @@ public class EditalController {
 		}
 	}
 
-	@GetMapping("arquivo/{id}")
-	public ResponseEntity<?> buscarEditalArquivo(@PathVariable Long id){
-		try {
-			EditalArquivoRepresentation arquivo = new EditalArquivoRepresentation();
-			arquivo.setEdital(editalServico.buscarEdital(id).getEdital());
-			return ResponseEntity.ok(arquivo);
-		} catch (NaoEncontradoException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
-	}
 
 	@PostMapping
 	public ResponseEntity<?> criarEdital(
@@ -103,7 +85,7 @@ public class EditalController {
 			@RequestParam(value = "requisitos", required = true) String requisitos,
 			@RequestParam(value = "prazo", required = true) String prazo,
 			@RequestParam(value = "tipo", required = true) TipoEnum tipo,
-			@RequestPart(value = "arquivo") MultipartFile arquivo
+			@RequestPart(value = "arquivo", required = true) MultipartFile arquivo
 	) throws ValidacaoException {
 		try{
 			String jwt =  token.substring(7);
@@ -114,10 +96,8 @@ public class EditalController {
 			editalDTO.setRequisitos(requisitos);
 			editalDTO.setTipo(tipo);
 			byte[] convertImage;
-			if(arquivo.isEmpty()) {
-				convertImage = arquivo.getBytes();
-				editalDTO.setEdital(convertImage);
-			}
+			convertImage =  arquivo.getBytes();
+			editalDTO.setEdital(convertImage);
 			editalDTO.setPrazo(df.parse(prazo, Locale.getDefault()));
 			return ResponseEntity.ok(converter(editalServico.updateEdital(id, editalDTO, jwt)));
 		} catch(Exception e){
@@ -128,14 +108,10 @@ public class EditalController {
 
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletarEdital(
-			@PathVariable Long id,
-			@RequestHeader(name = "Authorization", required = true) String token
-			){
+	public ResponseEntity<?> deletarEdital(@PathVariable Long id){
 		try {
-			String jwt =  token.substring(7);
-			editalServico.removerEdital(id, jwt);
-		} catch(Exception e) {
+			editalServico.removerEdital(id);
+		} catch(NaoEncontradoException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 
