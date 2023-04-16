@@ -1,42 +1,45 @@
 
   body {
     font-family: Arial, sans-serif;
-    color: #333;
   }
   
  
   #divGeral {
     width: 80%;
-    margin: 0 auto;
+    margin: auto;
     padding: 20px;
     border: 2px solid #ccc;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
   }
   
+  .outradiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   
-  .h3 {
-    font-size: 1.5em;
+  .titulo {
+    font-size: 25px;
     text-align: center;
   }
   
   
-  .p {
+  .paragraph {
     font-size: 1.2em;
     text-align: center;
   }
   
  
-  label {
-    display: inline-block;
-    width: 100px;
-    font-weight: bold;
+  .label-cadastro {
+    font-weight: normal;
     margin-bottom: 10px;
   }
   
   
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
+  .input-cadastro {
     width: 100%;
     padding: 5px;
     margin-bottom: 10px;
@@ -44,8 +47,29 @@
     border: 1px solid #ccc;
   }
   
+  .botao-voltar{
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #3750c0;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
   
-  button[type="submit"] {
+  .botao-voltar:hover {
+    background-color: #1e3a8a;
+  }
+
+  .botoes{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    justify-content: space-between;
+  }
+
+  .button-cadastro {
     padding: 10px;
     margin-top: 10px;
     margin-right: 10px;
@@ -56,11 +80,9 @@
     cursor: pointer;
   }
   
-
-  button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+  .button-cadastro:hover {
+    background-color: #268852;
+  }  
 
   #ErroEmail {
     display: block;
@@ -73,7 +95,7 @@
   }
 
 
-  button[type="submit"]:disabled {
+  /* button[type="submit"]:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     padding: 10px;
@@ -83,4 +105,4 @@
     color: #fff;
     border: none;
     border-radius: 5px;
-  }
+  } */

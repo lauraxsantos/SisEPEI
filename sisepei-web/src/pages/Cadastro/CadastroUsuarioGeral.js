@@ -38,48 +38,48 @@ export function CadastroUsuarioGeral(){
 
     return(
         <>
-            <form id="divGeral">
-                <div className="h3">
-                <h4>Cadastro de Usuario Geral</h4>
+            <form onSubmit={(event) => cadastrarUsuarioGeral(event)} id="divGeral">
+                <div className="titulo">
+                    <h4>Cadastro de Usuario Geral</h4>
                 </div>
 
-                <div className="p">
-                <p>Preencha o Cadastro com as informaçoes pertinentes</p>
+                <div className="paragraph">
+                    <p>Preencha o Cadastro com as informaçoes pertinentes</p>
                 </div>
 
-                <label htmlFor="nome">Nome:</label>
-                <input id="nome" type="text" required
-                onClick={(event)=> setNome(event.target.value)} />
-                {/*
-                
-                todos esses onClick tem que virar onChange!!!
-                
-                */}
+                <label classname="label-cadastro" htmlFor="nome">Nome:</label>
+                <input className="input-cadastro" id="nome" type="text" required
+                onChange={(event)=> setNome(event.target.value)} />
                 <br/>
-                <label htmlFor="email">Email:</label>
-                <input id="email" type="email" required
-                onClick={(event) => (setEmail(event.target.value) , setErrEmail(false))} />
+                
+                <label classname="label-cadastro" htmlFor="email">Email:</label>
+                <input className="input-cadastro" id="email" type="email" required
+                onChange={(event) => (setEmail(event.target.value) , setErrEmail(false))} />
 
                 {/* fazer uma logica ocm um botao para para verificar se no banco ja existe um emial igual a esse que o ccara esta tentando se cadastrar */}
                 {
                 errEmail ? <span id="ErroEmail">ERRO: Email ja cadastrado!, utilize outro endereço de Email.</span> : undefined
                 }{/* Esse texto do Span tem que ser VERMELHO!!! */}
                 <br/>
-                <label htmlFor="senha">Senha:</label>
-                <input id="senha" type="password" required
-                 onClick={(event)=> setSenha(event.target.value)} />
+                <label classname="label-cadastro" htmlFor="senha">Senha:</label>
+                <input className="input-cadastro" id="senha" type="password" required
+                 onChange={(event)=> setSenha(event.target.value)} />
                 <br/>
-                <label htmlFor="confirmaSenha">Confirme sua senha:</label>
-                <input id="confirmaSenha" type="password" required
-                 onClick={(event)=> setConfirmaSenha(event.target.value)} />
+                <label classname="label-cadastro" htmlFor="confirmaSenha">Confirme sua senha:</label>
+                <input className="input-cadastro" id="confirmaSenha" type="password" required
+                 onChange={(event)=> setConfirmaSenha(event.target.value)} />
                 <br/>
-                <button
-                 type="submit"
-                 disable={ senha.length>6  && senha !== confirmaSenha }
-                 onClick={(event) => cadastrarUsuarioGeral(event)}
-                >Cadastrar</button>
-                <button onClick={handleClick}>Voltar</button> 
-                <br/>
+                <div className="outradiv">
+                    <div className="botoes">
+                        <button
+                        className="button-cadastro"
+                        type="submit"
+                        disable={ senha.length>6  && senha !== confirmaSenha }
+                        >Cadastrar</button>
+                        <button className="botao-voltar" onClick={handleClick}>Voltar</button> 
+                        <br/>
+                    </div>
+                </div>
             </form>
             
         </>

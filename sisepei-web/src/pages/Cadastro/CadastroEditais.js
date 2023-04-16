@@ -62,48 +62,54 @@ export function CadastroEditais(){
     return(
        
         <>
-            <div id="divGeral">
-                <div className="h3">
-                <h3>Cadastro de Editais</h3>
+            <form onSubmit={(event) => (cadastrarEdital(event),setErrTitulo(false))} id="divGeral">
+                <div className="titulo">
+                    <h3>Cadastro de Editais</h3>
                 </div>
 
-                <div className="p">
-                <p>Preencha o campos abaixo com as informaçoes pertinentes sobre o Edital</p>
+                <div className="paragraph">
+                    <p>Preencha o campos abaixo com as informaçoes pertinentes sobre o Edital</p>
                 </div>
 
-                <label htmlFor="prazo">Prazo:</label>
-                <input id="prazo" type="date" 
-                onClick={(event)=> setPrazo(event.target.value)} />
+                <label classname="label-cadastro" htmlFor="prazo">Prazo:</label>
+                <input className="input-cadastro" id="prazo" type="date" 
+                onChange={(event)=> setPrazo(event.target.value)} />
                 <br/>
 
-                <label htmlFor="titulo">Titulo:</label>
-                <input id="titulo" type="text" required
-                onClick={(event)=> setTitulo(event.target.value)} />
+                <label classname="label-cadastro" htmlFor="titulo">Titulo:</label>
+                <input className="input-cadastro" id="titulo" type="text" required
+                onChange={(event)=> setTitulo(event.target.value)} />
                 {errTitulo && <span id="errTitulo">Este Titulo ja esta em uso, tente novamnete.</span>}
                 <br/>
 
-                <label htmlFor="descricao">Descrição:</label>
-                <textarea id="descricao" required
-                onClick={(event)=> setDescricao(event.target.value)} />
+                <label classname="label-cadastro" htmlFor="descricao">Descrição:</label>
+                <textarea className="textAreas" id="descricao" required
+                onChange={(event)=> setDescricao(event.target.value)} />
                 <br/>
 
-                <label htmlFor="requisitos">Requisitos:</label>
-                <textarea id="requisitos" required
-                onClick={(event)=> setRequisitos(event.target.value)} />
+                <label classname="label-cadastro" htmlFor="requisitos">Requisitos:</label>
+                <textarea className="textAreas" id="requisitos" required
+                onChange={(event)=> setRequisitos(event.target.value)} />
                 <br/>
 
-                <label htmlFor="edital">Edital:</label>
-                <input id="edital" type="file" accept=".doc,.docx,.pdf,.txt"
-                onClick={(event)=> setEdital(event.target.value)} />
+                <label classname="label-cadastro" htmlFor="edital">Edital:</label>
+                <input className="input-cadastro" id="edital" type="file" accept=".doc,.docx,.pdf,.txt"
+                onChange={(event)=> setEdital(event.target.value)} />
                 <br/>
-                <button
-                 onClick={(event) => (cadastrarEdital(event),setErrTitulo(false))}
 
-                >Cadastrar</button> 
-                <button onClick={handleClick}>Voltar</button>
-
-            </div>
+                <div className="outradiv">
+                    <div className="botoes">
+                        <button
+                        className="button-cadastro" 
+                        type="submit"
+                        >Cadastrar</button> 
+                        <button className="botao-voltar" onClick={handleClick}>Voltar</button>
+                    </div>
+                </div> 
+            </form>
+            
         </>
+    
     );
      
 }
