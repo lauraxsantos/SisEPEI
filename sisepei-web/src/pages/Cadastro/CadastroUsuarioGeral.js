@@ -49,7 +49,7 @@ export function CadastroUsuarioGeral(){
 
                 <label htmlFor="nome">Nome:</label>
                 <input id="nome" type="text" required
-                onClick={(event)=> setNome(event.target.value)} />
+                onChange={(event)=> setNome(event.target.value)} />
                 {/*
                 
                 todos esses onClick tem que virar onChange!!!
@@ -58,7 +58,7 @@ export function CadastroUsuarioGeral(){
                 <br/>
                 <label htmlFor="email">Email:</label>
                 <input id="email" type="email" required
-                onClick={(event) => (setEmail(event.target.value) , setErrEmail(false))} />
+                onChange={(event) => (setEmail(event.target.value) , setErrEmail(false))} />
 
                 {/* fazer uma logica ocm um botao para para verificar se no banco ja existe um emial igual a esse que o ccara esta tentando se cadastrar */}
                 {
@@ -67,11 +67,11 @@ export function CadastroUsuarioGeral(){
                 <br/>
                 <label htmlFor="senha">Senha:</label>
                 <input id="senha" type="password" required
-                 onClick={(event)=> setSenha(event.target.value)} />
+                 onChange={(event)=> setSenha(event.target.value)} />
                 <br/>
                 <label htmlFor="confirmaSenha">Confirme sua senha:</label>
                 <input id="confirmaSenha" type="password" required
-                 onClick={(event)=> setConfirmaSenha(event.target.value)} />
+                 onChange={(event)=> setConfirmaSenha(event.target.value)} />
                 <br/>
                 <button
                  type="submit"

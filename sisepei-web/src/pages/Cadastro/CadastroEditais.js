@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../lib/Api";
 import "./CadastroEditais.css";
@@ -18,30 +18,31 @@ export function CadastroEditais(){
     const [requisitos, setRequisitos] = useState("");
     const [edital, setEdital] = useState();
     const [prazo,setPrazo] = useState("");
-    const [tipo, setTipo] = useState(cookie.tipo);
-    const [coordenador, setCoordenador] = useState(cookie.nome); 
+    const [tipo, setTipo] = useState("");
     const [errTitulo, setErrTitulo] = useState(false);
-  
+
+
     async function cadastrarEdital(event) {
         event.preventDefault();
         //pelo oq eu vi somente isso aqui ja coloca o arquivo na request
         let formData = new FormData();
-        formData.append(
-            titulo,
-            edital
-            );
+        
+        formData.append("titulo", titulo);
+        formData.append("edital",edital);
+        formData.append("descricao",descricao);
+        formData.append("requisitos",requisitos);
+        formData.append("prazo",prazo);
+        formData.append("tipo",tipo);
+        
 
         await api
-        .post("/edital", {
-            titulo: titulo,
-            descricao: descricao,
-            requisitos: requisitos,
-            prazo: prazo,
-            tipo: tipo,
-            coordenador: coordenador,
-            edital: formData
-
-        })
+        .post("/edital", { 
+            formData ,
+            headers: {
+                Authorization: `Bearer ${cookie}`
+            }
+          }
+        )
         .then(() => alert("Usuario cadastrado com sucesso!"),
             setTitulo(""),
             setDescricao(""),
@@ -49,7 +50,6 @@ export function CadastroEditais(){
             setEdital(""),
             setPrazo(""),
             setTipo(""),
-            setCoordenador(""),
             setErrTitulo(false)
         )
         .catch((err) => setErrTitulo(true));
