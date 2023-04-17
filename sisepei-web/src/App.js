@@ -4,7 +4,7 @@ import { CadastroUsuarioGeral } from './pages/Cadastro/CadastroUsuarioGeral';
 import { MudancaPermicao } from './pages/Cadastro/MudancaPermicao';
 import { CadastroEditais } from './pages/Cadastro/CadastroEditais';
 
-import Header from '../src/Components/Header/Index';
+import Header from './Components/Header/Index';
 
 import Login from "./pages/Login/Login";
 import React from 'react';
@@ -15,6 +15,7 @@ import { EscolhaDePersonalidade } from './pages/pagina-intermedio-login-dashboar
 import PaginaInicial from './pages/pagina-inicial-usuario/Index';
 import PgCoordPesquisa from './pages/paginaInicialCoordPesquisa/Index';
 import PgCoordExtensao from './pages/pagina-coord-extensao/Index';
+import EditarEditais from './pages/tela-editar-editais/tela-editar-editais';
 
 
 
@@ -36,6 +37,8 @@ function App() {
 
         <Route path="/paginainicialCoordPesquisa" element={<PgCoordPesquisa/>} />
         <Route path="/paginainicialCoordExtensao" element={<PgCoordExtensao/>} />
+
+        <Route path="/editaredital" element={<EditarEditais/>} />
 
 
       </Routes>

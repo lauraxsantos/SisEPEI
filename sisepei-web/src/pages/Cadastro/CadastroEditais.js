@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../lib/Api";
 import "./CadastroEditais.css";
 import Cookies from 'js-cookie';
+import FormData from "form-data";
 
 //Se der errado: usar esse link como ref: https://www.bezkoder.com/react-file-upload-axios/
 //Usar formData pra lidar com o arquivo pdf que sej anexado e depois dar um append no arquivo pro
@@ -10,49 +11,56 @@ export function CadastroEditais(){
     //declaraçoes
     const navigate =  useNavigate();
 
-    const cookie = Cookies.get('token');
-
     //constantes com useState que serao utilizadas
     const [titulo, setTitulo] = useState("");
     const [descricao, setDescricao] = useState("");
     const [requisitos, setRequisitos] = useState("");
     const [edital, setEdital] = useState();
     const [prazo,setPrazo] = useState("");
-    const [tipo, setTipo] = useState(cookie.tipo);
-    const [coordenador, setCoordenador] = useState(cookie.nome); 
+    const [tipo, setTipo] = useState("");
     const [errTitulo, setErrTitulo] = useState(false);
-  
+
+    const tipos = {
+        COORDENADOR_EXTENSAO: "EXTENSAO",
+        COORDENADOR_PESQUISA: "PESQUISA",
+        COORDENADOR_INOVACAO: "INOVACAO"
+    }
+
+
     async function cadastrarEdital(event) {
         event.preventDefault();
         //pelo oq eu vi somente isso aqui ja coloca o arquivo na request
-        let formData = new FormData();
-        formData.append(
-            titulo,
-            edital
-            );
+        let bodyformData = new FormData();
+        
+        bodyformData.append("titulo", titulo);
+        bodyformData.append("arquivo", edital);
+        bodyformData.append("descricao", descricao);
+        bodyformData.append("requisitos", requisitos);
+        bodyformData.append("prazo", prazo);
+        bodyformData.append("tipo", tipo);
 
+        console.log("1");
         await api
-        .post("/edital", {
-            titulo: titulo,
-            descricao: descricao,
-            requisitos: requisitos,
-            prazo: prazo,
-            tipo: tipo,
-            coordenador: coordenador,
-            edital: formData
-
-        })
+        .post("/edital", bodyformData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${Cookies.get("token")}`
+            }
+          }
+        )
         .then(() => alert("Usuario cadastrado com sucesso!"),
-            setTitulo(""),
-            setDescricao(""),
-            setRequisitos(""),
-            setEdital(""),
-            setPrazo(""),
-            setTipo(""),
-            setCoordenador(""),
+            // setTitulo(""),
+            // setDescricao(""),
+            // setRequisitos(""),
+            // setEdital(""),
+            // setPrazo(""),
+            // setTipo(""),
             setErrTitulo(false)
         )
-        .catch((err) => setErrTitulo(true));
+        .catch((err) => {
+            console.log(err)
+            setErrTitulo(true)
+        });
     }
 
     const handleClick = () => {
