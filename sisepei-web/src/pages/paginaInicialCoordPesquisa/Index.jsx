@@ -40,7 +40,6 @@ export function PgCoordPesquisa() {
         <BotaoCadastrar />
           <div className='search-filter'>
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            <Filter/>
           </div>
       </div>
 

@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SisepeiApplication<sisepei>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.upe.sisepei.sisepei.SisepeiApplication",
+            "projectName": "sisepei",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

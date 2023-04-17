@@ -5,9 +5,9 @@ import { useState, useEffect } from 'react';
 
 function Filter({ onFilterChange }) {
   const [filterOptions, setFilterOptions] = useState([
-    { label: 'tipo 1', checked: false },
-    { label: 'tipo 2', checked: false },
-    { label: 'tipo 3', checked: false },
+    { label: 'EXTENSAO', checked: false },
+    { label: 'INOVACAO', checked: false },
+    { label: 'PESQUISA', checked: false },
   ]);
 
   const [selectedOptions, setSelectedOptions] = useState([]);
