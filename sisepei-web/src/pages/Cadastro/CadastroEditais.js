@@ -64,13 +64,13 @@ export function CadastroEditais(){
     }
 
     const handleClick = () => {
-        navigate('/');
+        navigate('/intermedio');
     }
 
     return(
        
         <>
-            <form onSubmit={(event) => (cadastrarEdital(event),setErrTitulo(false))} id="divGeral">
+            <form  id="divGeral">
                 <div className="titulo">
                     <h3>Cadastro de Editais</h3>
                 </div>
@@ -97,12 +97,21 @@ export function CadastroEditais(){
 
                 <label classname="label-cadastro" htmlFor="requisitos">Requisitos:</label>
                 <textarea className="textAreas" id="requisitos" required
-                onChange={(event)=> setRequisitos(event.target.value)} />
+                 onChange={(event)=> setRequisitos(event.target.value)} />
                 <br/>
 
+                <label classname="label-cadastro" htmlFor="tipo">Tipo:</label>
+                <select id="tipo" required
+                onChange={(event)=> setTipo(event.target.value)}>
+                    {Cookies.get("perfis").split(",").map((perfil) => <option value={tipos[perfil]}>{tipos[perfil]}</option>)}
+                </select>
+                <br/>
+                
                 <label classname="label-cadastro" htmlFor="edital">Edital:</label>
                 <input className="input-cadastro" id="edital" type="file" accept=".doc,.docx,.pdf,.txt"
-                onChange={(event)=> setEdital(event.target.value)} />
+                 onChange={(event)=> {
+                    setEdital(event.target.files.item(0))
+                 }} />
                 <br/>
 
                 <div className="outradiv">
@@ -110,6 +119,7 @@ export function CadastroEditais(){
                         <button
                         className="button-cadastro" 
                         type="submit"
+                        onClick={(event) => (cadastrarEdital(event),setErrTitulo(false))}
                         >Cadastrar</button> 
                         <button className="botao-voltar" onClick={handleClick}>Voltar</button>
                     </div>

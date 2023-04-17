@@ -20,7 +20,7 @@ const Login = () => {
         
         .then((res) =>{
             Cookies.set("token", res.data.token);
-            navigate('/paginainicial')
+            navigate('/intermedio')
         })
 
         .catch((error) => {

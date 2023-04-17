@@ -1,39 +1,50 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './EscolhaDePersonalidade.css';
-// import Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
+import { api } from "../../lib/Api";
 
 export function EscolhaDePersonalidade(){
 
     const navigate =  useNavigate();
 
-    // const cookie = Cookies.get('token');
+    const cookie = Cookies.get('token');
 
     const [ce, setCe] = useState(false);
     const [ci, setCi] = useState(false);
     const [cp, setCp] = useState(false);
     const [adm, setAdm] = useState(false);
+    const [perfil, setPerfil] = useState([]);
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     // let perfil = cookie.perfis;
+        api.get("/usuarios/perfil", {
+            headers: {
+                Authorization: `Bearer ${cookie}`
+            }
+        })
+        .then(
+            (res)=>( setPerfil(res.data.perfis) )
+            )
 
-    //     for (let index = 0; index < perfil.length; index++) {
-    //         if(perfil[index] === "ADMINISTRADOR"){
-    //             setAdm(true);
-    //         }
-    //         if(perfil[index] === "COORDENADOR_EXTENSAO"){
-    //             setCe(true);
-    //         }
-    //         if(perfil[index] === "COORDENADOR_PESQUISA"){
-    //             setCp(true);
-    //         }
-    //         if(perfil[index] === "COORDENADOR_INOVACAO"){
-    //             setCi(true);
-    //         }
-    //     }
+        for (let index = 0; index < perfil.length; index++) {
+            if(perfil[index].nome === "ADMINISTRADOR"){
+                setAdm(true);
+            }
+            if(perfil[index].nome === "COORDENADOR_EXTENSAO"){
+                setCe(true);
+            }
+            if(perfil[index].nome === "COORDENADOR_PESQUISA"){
+                setCp(true);
+            }
+            if(perfil[index].nome === "COORDENADOR_INOVACAO"){
+                setCi(true);
+            }
+        }
         
-    // }, []);
+    }, []);
+
+    
 
     
    
